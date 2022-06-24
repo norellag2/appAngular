@@ -1,0 +1,107 @@
+<div class="container">
+    <div class="breadcrumbs">
+        <p>
+            <span routerLink="/home">Inicio > </span>
+            <span class="active">Articulos</span>
+        </p>
+        <button class="outline" routerLink="/create-article">Nuevo</button>
+    </div>
+    <div class="card">
+        <form class="search" [formGroup]="form">
+            <input type="search" 
+                   placeholder="Modelo"
+                   formControlName="modelTerm"
+                   #search>
+        </form>
+
+        <table>
+            <tr>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Genero</th>
+                <th></th>
+            </tr>
+            <tr *ngIf="isSearching">
+                <td colspan="4">
+                    <app-spinner></app-spinner>
+                </td>
+            </tr>
+           <ng-container *ngIf="! isSearching">
+             <tr  *ngFor="let article of articles; let i = index">
+                <td>{{article.marca}}</td>
+                <td>{{article.modelo}}</td>
+                <td>{{article.genero}}</td>
+                <td class="icons">
+                    <span (click)="showArticle(i)">
+                        <img src="../../../assets/icons_app-main/eye.svg.svg" alt="">
+                    </span>
+                    <span class="m-l" routerLink="/update-article/{{article.id}}">
+                        <img src="/assets/icons_app-main/edit.svg" alt="">
+                    </span>
+                    <span class="m-l" (click)="setArticleDeleteId(article.id)">
+                        <img src="/assets/icons_app-main/trash.svg" alt="">
+
+                    </span>
+                </td>
+             </tr>
+           </ng-container> 
+           <tr *ngIf="articles.length === 0 && form.controls['modelTerm'].value.length !== 0 && isSearching">
+               <td colspan="4">No se encontraron coincidencias</td>
+           </tr>
+           
+        </table>
+    </div>
+</div>
+
+<div class="overlay" #overlay>
+    <div class="modal">
+        <div class="modal-header">
+            <span (click)="toggleModal()">&#x2715;</span>
+        </div>
+        <div class="modal-body">
+            <table class="side-header">
+                <tr>
+                    <th>Código SKU</th>
+                    <td>{{articles [articleIndex]?.sku}}</td>
+                </tr>
+                <tr>
+                    <th>Marca</th>
+                    <td>{{articles [articleIndex]?.marca}}</td>
+                </tr>
+                <tr>
+                    <th>Modelo</th>
+                    <td>{{articles [articleIndex]?.modelo}}</td>
+                </tr>
+                <tr>
+                    <th>Género</th>
+                    <td>{{articles [articleIndex]?.genero}}</td>
+                </tr>
+                <tr>
+                    <th>Descripción</th>
+                    <td>{{articles [articleIndex]?.descripcion}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="overlay" #overlaySmall>
+    <div class="modal small">
+       <div class="modal-header">
+           <span (click)="toggleSmallModal()">&#x2715;</span>
+       </div>
+       <div class="modal-body">
+           <p>¿Está seguro de eliminar el artículo?</p>
+       </div>
+       <div class="modal-footer">
+           <button class="outline"
+           (click)="toggleSmallModal()">Cancelar</button>
+           <button (click)="deleteArticle()"
+                   type="button"
+                   [disabled]="isDeleting">
+                   <span *ngIf="isDeleting">Espere...</span>
+                   <span *ngIf="!isDeleting">Aceptar</span>
+            </button>
+       </div>
+    </div>
+</div>

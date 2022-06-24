@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="breadcrumbs">
+        <p>
+            <span routerLink="/home">Inicio > </span>
+            <span class="active">Proveedores</span>
+        </p>
+        <button class="outline" routerLink="/create-vendor">Nuevo</button>
+    </div>
+    <div class="card">
+        <table>
+            <tr>
+               <th>CIF</th>
+               <th>Nombre</th>
+               <th>Localidad</th>
+               <th></th>
+
+            </tr>
+            <ng-container *ngIf="!isLoading">
+                <tr *ngFor="let vendor of vendors">
+                    <td>{{vendor.cif}}</td>
+                    <td>{{vendor.nombre}}</td>
+                    <td>{{vendor.localidad}}</td>
+                    <td class="icons">
+                        <span>
+                            <img src="/assets/icons_app-main/eye.svg.svg" alt="">
+                        </span>
+                        <span class="m-l">
+                            <img src="/assets/icons_app-main/edit.svg" alt="">
+
+                        </span>
+                        <span class="m-l">
+                            <img src="/assets/icons_app-main/trash.svg" alt="">
+                        </span>
+                    </td>
+               </tr>
+            </ng-container>
+           
+        </table>
+        <app-spinner *ngIf="isLoading"></app-spinner>
+        <div class="page-buttons" *ngIf="!isLoading">
+            <button (click)="firstPage()"
+                     [disabled]="pageState.isFirstPage"><<</button>
+            <button (click)="previusPage()"
+                    [disabled]="pageState.isFirstPage"><</button>
+            <span>{{pageState.currentNumberPage + 1}} de {{pageState.lastPage + 1}}</span>
+            <button (click)="nextPage()"
+                     [disabled]="pageState.isLastPage"> > </button>
+            <button (click)="lastPage()"
+                     [disabled]="pageState.isLastPage"> >> </button>
+        </div>
+    </div>
+</div>

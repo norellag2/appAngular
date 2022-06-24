@@ -1,0 +1,24 @@
+<aside #aside>
+    <div class="burger" (click)="toggAsideNav()">
+        <div class="bar top"></div>
+        <div class="bar medium"></div>
+        <div class="bar bottom"></div>
+    </div>
+    <div class="item" (click)="navToComponent('/home')">
+        Inicio
+        <img src="/assets/icons_app-main/home.svg" alt="">
+    </div>
+    <div class="item" (click)="navToComponent('/articles')">
+        Artículos
+        <img src="/assets/icons_app-main/customers.svg" alt="">
+    </div>
+    <div class="item" (click)="navToComponent('/vendors')">
+        Proveedores
+        <img src="/assets/icons_app-main/user.svg" alt="">
+
+    </div>
+    <div class="item" (click)="navToComponent('/offers')">
+        Ofertas
+        <img src="/assets/icons_app-main/budgets.svg" alt="">
+    </div>
+</aside>

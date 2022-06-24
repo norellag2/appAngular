@@ -1,0 +1,85 @@
+<form [formGroup]="form" (ngSubmit)="sendOffer()">
+    <div class="row">
+        <div class="col-100 relative">
+            <label>
+                Artículo
+            </label>
+            <input type="text" formControlName="articuloTerm"
+                               placeholder="Busque por modelo">
+            <div class="search-results">
+                <div class="item"
+                     *ngFor="let article of articles"
+                     (click)="setSelectedArticle(article)">
+                    {{article.marca}} | {{article.modelo}} | {{article.genero}}
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" formGroupName="articulo">
+        <div class="col-33">
+            <input type="text" formControlName="marca" readonly>
+        </div>
+
+        <div class="col-33">
+            <input type="text" formControlName="modelo" readonly>
+        </div>
+
+        <div class="col-33">
+            <input type="text" formControlName="genero" readonly>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-100 relative">
+            <label>
+                Proveedor
+            </label>
+            <input type="text" formControlName="proveedorTerm"
+                               placeholder="Busque por nombre">
+            <div class="search-results">
+                <div class="item" 
+                     *ngFor="let vendor of vendors"
+                     (click)=" setSelectedVendor(vendor)" >
+                    {{vendor.nombre}} | {{vendor.cif}} | {{vendor.localidad}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row"formGroupName="proveedor">
+        <div class="col-33">
+            <input type="text" formControlName="nombre" readonly>
+        </div>
+
+        <div class="col-33">
+            <input type="text" formControlName="cif" readonly>
+        </div>
+
+        <div class="col-33">
+            <input type="text" formControlName="localidad" readonly>
+        </div>
+
+
+    </div>
+    <div class="row">
+        <div class="col-50">
+            <label>
+                Precio
+            </label>
+            <input type="number" formControlName="precio">
+        </div>
+        <div class="col-50">
+            <label>
+                Plazo de entrega (días)
+            </label>
+            <input type="number" formControlName="plazoEntregaDias">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-100 flex j-end">
+           <button class="outline" 
+                   type="button"
+                   routerLink="/offers">Cancelar</button>
+            <button class="m-l"
+                    type="submit">Enviar</button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,36 @@
+button {
+    padding: 0.5rem 1rem;
+    border-radius: 0.4rem;
+    border: 1px solid $brand-color;
+    background-color: $brand-color;
+    color: white;
+    cursor: pointer;
+    font-family: $regular-font-family;
+   
+    &.outline {
+        background-color: white;
+        color: $brand-color;
+    }
+
+    &:disabled {
+        background-color: lightgray;
+        border-color: lightgray;
+        cursor: not-allowed;
+    }
+}
+
+.page-buttons {
+    @include flex(row, center, center);
+
+    button {
+        padding: 0.5rem 0.7rem;
+        margin: 0 0.3rem;
+    }
+    span {
+        font-size: 0.85rem;
+        padding: 0.5rem 0.7rem;
+        margin: 0 0.3rem;
+        border: solid 1px $brand-color;
+        border-radius: 0.4rem;
+    }
+}
